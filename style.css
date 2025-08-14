@@ -1,15 +1,15 @@
 /* Base Styles */
 :root {
-    --fire: #ff5e00;
-    --water: #00a8ff;
-    --earth: #8b4513;
-    --air: #a8e6cf;
+    --primary: #ff00aa;
+    --secondary: #00f7ff;
     --dark: #111;
+    --light: #fff;
 }
 
 body {
     margin: 0;
     background: var(--dark);
+    color: var(--light);
     font-family: 'Arial', sans-serif;
     overflow-x: hidden;
 }
@@ -29,30 +29,25 @@ body {
     z-index: 9999;
 }
 
-.elemental-symbols {
+.flib-arawy-loader {
     display: flex;
-    gap: 20px;
+    gap: 5px;
 }
 
-.symbol {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    animation: pulse 2s infinite;
+.letter {
+    font-size: 3rem;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: floatIn 0.5s forwards;
 }
 
-.fire { background: var(--fire); box-shadow: 0 0 15px var(--fire); }
-.water { background: var(--water); box-shadow: 0 0 15px var(--water); }
-.earth { background: var(--earth); box-shadow: 0 0 15px var(--earth); }
-.air { background: var(--air); box-shadow: 0 0 15px var(--air); }
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
+@keyframes floatIn {
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .loading-bar {
-    width: 200px;
+    width: 300px;
     height: 10px;
     background: rgba(255, 255, 255, 0.1);
     margin-top: 30px;
@@ -60,10 +55,10 @@ body {
     overflow: hidden;
 }
 
-.water-fill {
+.loading-fill {
     height: 100%;
     width: 0%;
-    background: var(--water);
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
     animation: fill 3s forwards;
 }
 
@@ -71,89 +66,156 @@ body {
     to { width: 100%; }
 }
 
-/* Hero Section */
-.hero {
+/* Animation Sections */
+main {
+    width: 100%;
+}
+
+section {
     height: 100vh;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
     overflow: hidden;
 }
 
-.title {
-    color: white;
-    font-size: 4rem;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    margin-bottom: 2rem;
+h1 {
+    font-size: 5rem;
+    text-align: center;
 }
 
-.elemental-masters {
-    display: flex;
-    gap: 30px;
+/* Neon Flicker Effect */
+.neon-flicker h1 {
+    color: var(--primary);
+    text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+    animation: flicker 2s infinite alternate;
 }
 
-.master {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: transform 0.3s;
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+    }
+    20%, 24%, 55% {
+        text-shadow: none;
+    }
 }
 
-.master:hover {
-    transform: scale(1.2);
+/* Liquid Morph Effect */
+.liquid-morph h1 {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: liquid 5s infinite alternate;
 }
 
-.fire { background: var(--fire); }
-.water { background: var(--water); }
-.earth { background: var(--earth); }
-.air { background: var(--air); }
+@keyframes liquid {
+    0% { filter: blur(0px); }
+    50% { filter: blur(2px); letter-spacing: 5px; }
+    100% { filter: blur(0px); }
+}
 
-/* Particle Canvas */
-#particles {
+/* Fire Text Effect */
+.fire-text h1 {
+    position: relative;
+}
+
+.fire-text h1::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, var(--primary), var(--secondary));
+    z-index: -1;
+    filter: blur(20px);
+    opacity: 0.7;
+    animation: fire 2s infinite alternate;
+}
+
+@keyframes fire {
+    0% { transform: scaleY(1); }
+    50% { transform: scaleY(1.2); }
+    100% { transform: scaleY(1); }
+}
+
+/* Glitch Effect */
+.glitch-effect h1 {
+    position: relative;
+}
+
+.glitch-effect h1::before,
+.glitch-effect h1::after {
+    content: 'FLIB ARAWY';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
 }
 
-/* Arena Section */
-.arena {
-    padding: 5rem 0;
-    text-align: center;
-    background: rgba(0, 0, 0, 0.7);
+.glitch-effect h1::before {
+    color: var(--primary);
+    animation: glitch 3s infinite;
 }
 
-.arena h2 {
-    color: white;
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
+.glitch-effect h1::after {
+    color: var(--secondary);
+    animation: glitch 2s infinite reverse;
 }
 
-.arena-container {
-    width: 80%;
-    height: 400px;
-    margin: 0 auto;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    position: relative;
-    overflow: hidden;
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-5px, 5px); }
+    40% { transform: translate(-5px, -5px); }
+    60% { transform: translate(5px, 5px); }
+    80% { transform: translate(5px, -5px); }
+    100% { transform: translate(0); }
 }
 
-/* Footer */
-footer {
-    padding: 2rem;
-    text-align: center;
-    color: white;
-    position: relative;
-    overflow: hidden;
+/* Holographic Effect */
+.holographic h1 {
+    color: transparent;
+    background: linear-gradient(90deg, 
+        var(--primary), 
+        var(--secondary), 
+        var(--primary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-size: 200% auto;
+    animation: hologram 3s infinite linear;
 }
 
-.floating-elements {
+@keyframes hologram {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+
+/* Coming Soon Section */
+.coming-soon {
+    background: #000;
+}
+
+.coming-soon h1 {
+    font-size: 8rem;
+    background: linear-gradient(to right, 
+        #ff0000, #ff7700, #ffdd00, #00ff00, 
+        #0088ff, #8800ff, #ff00ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 400% auto;
+    animation: rainbow 5s linear infinite;
+}
+
+@keyframes rainbow {
+    0% { background-position: 0% center; }
+    100% { background-position: 400% center; }
+}
+
+.particle-explosion {
     position: absolute;
     top: 0;
     left: 0;
