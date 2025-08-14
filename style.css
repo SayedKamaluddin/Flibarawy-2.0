@@ -1,0 +1,163 @@
+/* Base Styles */
+:root {
+    --fire: #ff5e00;
+    --water: #00a8ff;
+    --earth: #8b4513;
+    --air: #a8e6cf;
+    --dark: #111;
+}
+
+body {
+    margin: 0;
+    background: var(--dark);
+    font-family: 'Arial', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Loader */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.elemental-symbols {
+    display: flex;
+    gap: 20px;
+}
+
+.symbol {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+.fire { background: var(--fire); box-shadow: 0 0 15px var(--fire); }
+.water { background: var(--water); box-shadow: 0 0 15px var(--water); }
+.earth { background: var(--earth); box-shadow: 0 0 15px var(--earth); }
+.air { background: var(--air); box-shadow: 0 0 15px var(--air); }
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.loading-bar {
+    width: 200px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    margin-top: 30px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.water-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--water);
+    animation: fill 3s forwards;
+}
+
+@keyframes fill {
+    to { width: 100%; }
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.title {
+    color: white;
+    font-size: 4rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    margin-bottom: 2rem;
+}
+
+.elemental-masters {
+    display: flex;
+    gap: 30px;
+}
+
+.master {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.master:hover {
+    transform: scale(1.2);
+}
+
+.fire { background: var(--fire); }
+.water { background: var(--water); }
+.earth { background: var(--earth); }
+.air { background: var(--air); }
+
+/* Particle Canvas */
+#particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Arena Section */
+.arena {
+    padding: 5rem 0;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.arena h2 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.arena-container {
+    width: 80%;
+    height: 400px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Footer */
+footer {
+    padding: 2rem;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
